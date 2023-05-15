@@ -49,8 +49,39 @@ async function main() {
         },
       ]
     })
-
   }
+
+  let roomTest = await prisma.room.findFirst()
+  if(!roomTest) {
+    let hotel = await prisma.hotel.findFirst()
+    if(!hotel) return;
+    await prisma.room.createMany({
+      data:[
+        {
+          name: 'quarto 1' ,
+          capacity: 2,
+          hotelId: hotel.id,
+        },
+        {
+          name: 'quarto 2' ,
+          capacity: 1,
+          hotelId: hotel.id,
+        },
+        {
+          name: 'quarto 3' ,
+          capacity: 2,
+          hotelId: hotel.id,
+        },
+        {
+          name: 'quarto 4' ,
+          capacity: 3,
+          hotelId: hotel.id,
+        },
+      ]
+    })
+  }
+  
+  
 
 
 
