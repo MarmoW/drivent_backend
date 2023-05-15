@@ -36,8 +36,28 @@ async function main() {
     });
   }
 
-  console.log({ event });
+  let hotelTest = await prisma.hotel.findFirst()
+  if (!hotelTest) {
+    await prisma.hotel.createMany({
+      data:[
+        {
+          name: 'Cativeiro A',
+          image: 'https://pbs.twimg.com/media/D-ZgkyQXoAADbqZ?format=jpg&name=900x900',
+        },{
+          name: 'Cativeiro B',
+          image: 'https://s2.glbimg.com/en14oahqtOxbLiX1ZbdZr3dYv2Q=/smart/e.glbimg.com/og/ed/f/original/2020/09/11/anuncio-apartamento-viraliza-04.jpg',
+        },
+      ]
+    })
+
+  }
+
+
+
+  console.log({ event }, {hotelTest});
 }
+
+
 
 main()
   .catch((e) => {
